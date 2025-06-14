@@ -2,7 +2,7 @@ import os
 import logging
 from dotenv import load_dotenv
 from telegram.ext import ApplicationBuilder, CommandHandler
-from bot_commands import start, check_balance, pnl_analysis
+from bot_commands import start, check_balance, pnl_analysis, wallet_stats
 
 logging.basicConfig(level=logging.INFO)
 load_dotenv()
@@ -15,5 +15,6 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("balance", check_balance))
     app.add_handler(CommandHandler("pnl", pnl_analysis))
+    app.add_handler(CommandHandler("stats", wallet_stats))
 
     app.run_polling()

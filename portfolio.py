@@ -61,5 +61,29 @@ class PortFolio:
                 'success': False,
                 'error': str(e)
             }
+        
+    def get_wallet_stats(self, wallet_address):
+        url = f"{self.base_url}/wallets/{wallet_address}/stats"
+
+        try:
+            response = requests.get(url, headers=self.headers, params=self.params)
+            if response.status_code == 200:
+                data = response.json()
+                prompt = str(data)
+                suggestion = generate_response(prompt)
+                return {
+                    'success': True,
+                    'value': suggestion
+                }
+            else:
+                return {
+                    'success': False,
+                    'error': 'Failed to get analysis'
+                }
+        except Exception as e:
+            return {
+                'success': False,
+                'error': str(e)
+            }
 
             
